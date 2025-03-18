@@ -1,0 +1,8 @@
+Flask
+Python
+requests
+os
+subprocess
+flask_session
+yfinance
+requests_html

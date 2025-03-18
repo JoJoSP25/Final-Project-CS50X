@@ -1,0 +1,1039 @@
+{% extends "layout.html" %}
+
+
+{% block title %}Subsend{% endblock %}
+{% block main %}
+    <div class="main_container_lectures">
+        <div class="lectures">
+            <div id="pop_up_0" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>Scratch</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <div class="pop_up_psets scratch" id="psets_0">
+                    <button onclick="favPset(this, 'psets_0', 'response_fav_0', 'response_fav_lecture_0')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Starting From Scratch</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_0')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 0</h1>
+                    <button onclick="openPopUp('pop_up_0')" class="button_psets {{ 'hidden' if success_flags.get(0) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_0" method="post" class="form_lecture {{ 'hidden' if success_flags.get(0) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_0" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_0" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="0">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(0) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=2WtPyqwTLKM">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/2WtPyqwTLKM/maxresdefault.jpg" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 0) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 0 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=0) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(0)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_0' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_0" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_0">
+                                        <button onclick="saveComment(0)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(0)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures_even">
+            <div id="pop_up_1" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>C</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_1">
+                    <button onclick="favPset(this, 'psets_1', 'response_fav_1', 'response_fav_lecture_1')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Hello, World</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_1', 'response_fav_1', 'response_fav_lecture_1')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Hello, It's Me</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_1', 'response_fav_1', 'response_fav_lecture_1')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Mario - Less</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_1', 'response_fav_1', 'response_fav_lecture_1')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Mario - More</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_1', 'response_fav_1', 'response_fav_lecture_1')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Cash</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_1', 'response_fav_1', 'response_fav_lecture_1')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Credit</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_1')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 1</h1>
+                    <button onclick="openPopUp('pop_up_1')" class="button_psets {{ 'hidden' if success_flags.get(1) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_1" method="post" class="form_lecture {{ 'hidden' if success_flags.get(1) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_1" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_1" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="1">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(1) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=89cbCbWrM4U">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/89cbCbWrM4U/maxresdefault.jpg" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 1) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 1 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=1) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(1)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_1' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_1" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_1">
+                                        <button onclick="saveComment(1)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(1)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures">
+            <div id="pop_up_2" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>Arrays</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_2">
+                    <button onclick="favPset(this, 'psets_2', 'response_fav_2', 'response_fav_lecture_2')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Scrabble</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_2', 'response_fav_2', 'response_fav_lecture_2')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Readability</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_2', 'response_fav_2', 'response_fav_lecture_2')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Caesar</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_2', 'response_fav_2', 'response_fav_lecture_2')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Subtitution</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_2')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 2</h1>
+                    <button onclick="openPopUp('pop_up_2')" class="button_psets {{ 'hidden' if success_flags.get(2) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_2" method="post" class="form_lecture {{ 'hidden' if success_flags.get(2) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_2" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_2" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="2">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(2) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=Y8qnryVy5sQ">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/Y8qnryVy5sQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD3CSHpmeH8Fg85PCyhTGFQMtK7HA" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 2) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 2 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=2) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(2)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_2' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_2" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_2">
+                                        <button onclick="saveComment(2)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(2)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures_even">
+            <div id="pop_up_3" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>Algorithms</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_3">
+                    <button onclick="favPset(this, 'psets_3', 'response_fav_3', 'response_fav_lecture_3')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Sort</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_3', 'response_fav_3', 'response_fav_lecture_3')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Plurality</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_3', 'response_fav_3', 'response_fav_lecture_3')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Runoff</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_3', 'response_fav_3', 'response_fav_lecture_3')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Tideman</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_3')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 3</h1>
+                    <button onclick="openPopUp('pop_up_3')" class="button_psets {{ 'hidden' if success_flags.get(3) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_3" method="post" class="form_lecture {{ 'hidden' if success_flags.get(3) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_3" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_3" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="3">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(3) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=iCx3zwK8Ms8">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/iCx3zwK8Ms8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCIOfccDmtkpRmKCnm28Q1OAa5bew" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 3) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 3 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=3) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(3)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_3' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_3" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_3">
+                                        <button onclick="saveComment(3)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(3)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures">
+            <div id="pop_up_4" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>Memory</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_4">
+                    <button onclick="favPset(this, 'psets_4', 'response_fav_4', 'response_fav_lecture_4')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Volume</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_4', 'response_fav_4', 'response_fav_lecture_4')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Filter - Less</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_4', 'response_fav_4', 'response_fav_lecture_4')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Filter - More</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_4', 'response_fav_4', 'response_fav_lecture_4')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Recover</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_4')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 4</h1>
+                    <button onclick="openPopUp('pop_up_4')" class="button_psets {{ 'hidden' if success_flags.get(4) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_4" method="post" class="form_lecture {{ 'hidden' if success_flags.get(4) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_4" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_4" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="4">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(4) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=kcRdFGbzR1I">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/kcRdFGbzR1I/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBOC5kQiiZa_tdUOwsNgB6xD2504Q" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 4) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 4 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=4) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(4)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_4' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                <textarea required id="display_textarea_4" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_4">
+                                    <button onclick="saveComment(4)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                    <button onclick="cancelComment(4)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures_even">
+            <div id="pop_up_5" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>Data Structures</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_5">
+                    <button onclick="favPset(this, 'psets_5', 'response_fav_5', 'response_fav_lecture_5')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Inheritance</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_5', 'response_fav_5', 'response_fav_lecture_5')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Speller</li>
+                </div>
+                <i onclick="closePopUp('pop_up_5')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 5</h1>
+                    <button onclick="openPopUp('pop_up_5')" class="button_psets {{ 'hidden' if success_flags.get(5) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_5" method="post" class="form_lecture {{ 'hidden' if success_flags.get(5) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_5" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_5" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="5">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(5) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=aV8LlSmd1E8">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/aV8LlSmd1E8/maxresdefault.jpg" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 5) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 5 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=5) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(5)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_5' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_5" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_5">
+                                        <button onclick="saveComment(5)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(5)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures">
+            <div id="pop_up_6" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>Python</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_6">
+                    <button onclick="favPset(this, 'psets_6', 'response_fav_6', 'response_fav_lecture_6')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Hello</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_6', 'response_fav_6', 'response_fav_lecture_6')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Mario</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_6', 'response_fav_6', 'response_fav_lecture_6')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Cash</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_6', 'response_fav_6', 'response_fav_lecture_6')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Credit</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_6', 'response_fav_6', 'response_fav_lecture_6')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Readability</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_6', 'response_fav_6', 'response_fav_lecture_6')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>DNA</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_6')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 6</h1>
+                    <button onclick="openPopUp('pop_up_6')" class="button_psets {{ 'hidden' if success_flags.get(6) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_6" method="post" class="form_lecture {{ 'hidden' if success_flags.get(6) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_6" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_6" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="6">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(6) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=0eNc5lJfZFM">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/0eNc5lJfZFM/maxresdefault.jpg" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 6) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 6 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=6) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(6)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_6' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                <textarea required id="display_textarea_6" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_6">
+                                    <button onclick="saveComment(6)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                    <button onclick="cancelComment(6)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures_even">
+            <div id="pop_up_7" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>SQL</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_7">
+                    <button onclick="favPset(this, 'psets_7', 'response_fav_7', 'response_fav_lecture_7')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Songs</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_7', 'response_fav_7', 'response_fav_lecture_7')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Movies</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_7', 'response_fav_7', 'response_fav_lecture_7')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Fiftyville</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_7')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 7</h1>
+                    <button onclick="openPopUp('pop_up_7')" class="button_psets {{ 'hidden' if success_flags.get(7) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_7" method="post" class="form_lecture {{ 'hidden' if success_flags.get(7) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_7" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_7" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="7">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(7) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=ZA25WHO62ZA">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/ZA25WHO62ZA/maxresdefault.jpg" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 7) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 7 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=7) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(7)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_7' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_7" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_7">
+                                        <button onclick="saveComment(7)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(7)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures">
+            <div id="pop_up_8" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>HTML, CSS, JS</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_8">
+                    <button onclick="favPset(this, 'psets_8', 'response_fav_8', 'response_fav_lecture_8')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Trivia</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_8', 'response_fav_8', 'response_fav_lecture_8')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Homepage</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_8')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 8</h1>
+                    <button onclick="openPopUp('pop_up_8')" class="button_psets {{ 'hidden' if success_flags.get(8) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_8" method="post" class="form_lecture {{ 'hidden' if success_flags.get(8) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_8" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_8" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="8">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(8) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=xiWUL3M9D8c">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/xiWUL3M9D8c/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBxPzlGXrxAKBH2Neg9SfKhf5kAzQ" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 8) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 8 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=8) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(8)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_8' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_8" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_8">
+                                        <button onclick="saveComment(8)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(8)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <hr>
+        <div class="lectures_even">
+            <div id="pop_up_9" class="pop_up">
+                <div class="pop_up_header">
+                    <h2>Flask</h2>
+                    <a target="_BLANK" href="https://cs50.me/cs50x">www.cs50.me</a>
+                </div>
+                <h2 class="choose_pset">Choose your favorite pset:</h2>
+                <div class="pop_up_psets" id="psets_9">
+                    <button onclick="favPset(this, 'psets_9', 'response_fav_9', 'response_fav_lecture_9')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Birthdays</li>
+                    </button>
+                    <button onclick="favPset(this, 'psets_9', 'response_fav_9', 'response_fav_lecture_9')" class="fav_pset">
+                        <li><i class="fa-solid fa-folder"></i>Finance</li>
+                    </button>
+                </div>
+                <i onclick="closePopUp('pop_up_9')" class="fa-solid fa-circle-xmark" id="close_pop_up"></i>
+            </div>
+            <div class="lecture_info">
+                <div class="lecture_header">
+                    <h1>Week 9</h1>
+                    <button onclick="openPopUp('pop_up_9')" class="button_psets {{ 'hidden' if success_flags.get(9) else ''}}">Psets</button>
+                </div>
+                <hr>
+                <form action="/submit/form_9" method="post" class="form_lecture {{ 'hidden' if success_flags.get(9) else ''}}">
+                    <textarea placeholder="Write your opinion about this week" name="inputValue" rows="1" cols="50" wrap="physical" required></textarea>
+                    <div id="response_fav_lecture_9" class="response_fav_lecture">
+                        <p class="show_favorite_pset">Your favorite pset is:</p>
+                        <textarea name="fav_pset" id="response_fav_9" class="fav_lecture_pset_one" readonly></textarea>
+                    </div>
+                    <input type="hidden" name="form_id" value="9">
+                    <button type="submit">Submit</button>
+                </form>
+                {% if success_flags.get(9) %}
+                    <div class="submission_sent_container">
+                        <div class="check_icon_submission">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div class="submission_words_thanks">
+                            <h3>Thank you!</h3>
+                            <p>Your submission has been sent.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="container_img_lecture">
+                <a class="anchor_tag_lecture" target="_BLANK" href="https://www.youtube.com/watch?v=1r-dFbPQ7Z8">
+                    <img class="img_lecture" src="https://i.ytimg.com/vi/1r-dFbPQ7Z8/maxresdefault.jpg" width="200">
+                </a>
+            </div>
+            <div class="comments_lecture">
+                <h1>Comments({{ submissions | selectattr("week", "equalto", 9) | list | count }})</h1>
+                {% for submission in submissions %}
+                    {% if submission.week == 9 %}
+                        <div class="display_answer_lecture">
+                            <div class="profile_lecture_answer">
+                                <i class="fa-solid fa-circle-user lecture_profile_user"></i>
+                                <div class="person_time_lecture">
+                                    <div class="person_favpset_lecture">
+                                        <p class="person_lecture_response">{{ submission.person }}</p>
+                                        <div class="vl"></div>
+                                        <p class="favpset_lecture_respose">{{ submission.fav_pset }}</p>
+                                    </div>
+                                    <p class="time_lecture_response">{{ submission.timestamp }}</p>
+                                </div>
+                                <div class="delete_edit_reply">
+                                    {% if submission.user_id == session["user_id"] %}
+                                        <a class="anchor_button_delete" href="{{ url_for('reset', reset_id=9) }}">
+                                            <i class="fa-solid fa-trash delete_lecture_response"></i>
+                                        </a>
+                                        <a onclick="editComment(9)" class="anchor_button_edit">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="lecture_response_display">
+                                <p id="{{ 'week_opinion_9' if submission.user_id == session['user_id'] else ''}}" >{{ submission.week_opinion }}</p>
+                                {% if submission.user_id == session["user_id"] %}
+                                    <textarea required id="display_textarea_9" style="display: none; border-radius: 5px; height: 100px; margin-bottom: 10px; font-size: 14px; font-family: 'CNN Sans Display W04 Light'; width: 90%; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">{{ submission.week_opinion}}</textarea>
+                                    <div class="show_buttons_comment_edit_cancel" id="div_buttons_save_cancel_9">
+                                        <button onclick="saveComment(9)" class="button_save_comment"><i class="fa-regular fa-floppy-disk"></i>Save</button>
+                                        <button onclick="cancelComment(9)" class="button_cancel_comment"><i class="fa-solid fa-comment-slash"></i>Cancel</button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+    </div>
+    <script>
+        function openPopUp(popUpId) {
+            let pop_up = document.getElementById(popUpId);
+
+            setTimeout(function () {
+                pop_up.style.display = "block";
+                setTimeout(function () {
+                    pop_up.classList.add("show");
+                }, 10);
+            }, 10);
+        }
+        function closePopUp(popUpId) {
+            let pop_up = document.getElementById(popUpId);
+
+            pop_up.classList.remove("show");
+
+            setTimeout(function () {
+                pop_up.style.display = "none";
+            }, 300);
+        }
+
+        function favPset(button, div_psets, textarea_id, div_id) {
+            container = document.getElementById(div_psets);
+
+            if (button.classList.contains('active')) {
+                button.classList.remove("active");
+                document.getElementById(div_id).style.display = "none";
+                return;
+            }
+            container.querySelectorAll("button").forEach((btn) => {
+                btn.classList.remove("active");
+            });
+
+            button.classList.add("active");
+            document.getElementById(textarea_id).value = button.textContent;
+            document.getElementById(div_id).style.display = "flex";
+        }
+
+        function editComment(commentId) {
+            if (document.getElementById(`display_textarea_${commentId}`).style.display == "none") {
+                document.getElementById(`week_opinion_${commentId}`).style.display = "none";
+                document.getElementById(`div_buttons_save_cancel_${commentId}`).style.display = "flex";
+                document.getElementById(`display_textarea_${commentId}`).style.display = "block";
+                document.getElementById(`display_textarea_${commentId}`).value = document.getElementById(`week_opinion_${commentId}`).textContent.trim()
+            }
+            else {
+                document.getElementById(`week_opinion_${commentId}`).style.display = "block";
+                document.getElementById(`div_buttons_save_cancel_${commentId}`).style.display = "none";
+                document.getElementById(`display_textarea_${commentId}`).style.display = "none";
+            }
+        }
+
+        function saveComment(commentId) {
+            let updated_text = document.getElementById(`display_textarea_${commentId}`).value;
+
+            fetch(`/edit/${commentId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ text: updated_text }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    document.getElementById(`week_opinion_${commentId}`).innerHTML = updated_text;
+                    document.getElementById(`week_opinion_${commentId}`).style.display = "block";
+                    document.getElementById(`display_textarea_${commentId}`).style.display = "none";
+                    document.getElementById(`div_buttons_save_cancel_${commentId}`).style.display = "none";
+                }
+                else {
+                    alert("Error updating comment");
+                }
+            })
+        }
+        function cancelComment(commentId) {
+            let textarea = document.getElementById(`display_textarea_${commentId}`);
+            if (textarea) {
+                textarea.value = "";  // Clear the text inside the textarea
+            }
+        }
+    </script>
+{% endblock %}

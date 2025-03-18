@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+
+{% block title %}Stocks{% endblock %}
+
+{% block main %}
+    <div class="container_search_stocks">
+        <div class="search_input" id="parent">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="s_stock" type="text" placeholder="Search stock by symbol" autocomplete="off" name="stock">
+        </div>
+    </div>
+    <script>
+        let parent = document.getElementById("parent");
+        let input = document.querySelector(".s_stock");
+        input.addEventListener('input', async function () {
+
+            if (input.value === "") {
+                document.getElementById("stocks_display").remove();
+                return;
+            }
+            else {
+                if (!document.body.contains(document.getElementById("stocks_display")))
+                {
+                    const newDiv = document.createElement('div');
+                    newDiv.id = ('stocks_display');
+                    newDiv.classList.add("stocks_info", "stocks_info_errors");
+
+                    const ul = document.createElement('ul')
+                    ul.id = ('stocks');
+
+                    newDiv.appendChild(ul);
+                    parent.appendChild(newDiv);
+
+                    try {
+                        const response = await fetch(`/get_stocks/${input.value.toUpperCase()}`);
+                        const data = await response.json();
+
+                        if (data.error) {
+                            document.getElementById("stocks_display").classList.add("stocks_info_errors");
+                            document.getElementById("stocks").innerHTML = `<li class="not_found">Stock not found</li>`;
+                        }
+
+                        else {
+                            document.getElementById("stocks_display").classList.remove("stocks_info_errors");
+                            document.getElementById("stocks").innerHTML = `<div class="first_column"><li class="symbol"> ${data.symbol}</li>` +  `<li class="company_name">${data.company_name}</li></div>` + `<div class="sec_column"><p>Price</p><li class="price"><i class="fa-solid fa-dollar-sign"></i>${data.price} </li></div>`;
+                            document.querySelector(".stocks_info").addEventListener('click', function() {
+                                window.location.href=`/stock-info?symbol=${data.symbol}`;
+                            });
+                        }
+                    }
+                    catch (error) {
+                        document.getElementById("stocks_display").classList.add("stocks_info_errors");
+                        document.getElementById("stocks").innerHTML = `<li>Unable to fetch stock data</li>`;
+                    }
+                }
+                else {
+                    try {
+                        const response = await fetch(`/get_stocks/${input.value.toUpperCase()}`);
+                        const data = await response.json();
+
+                        if (data.error) {
+                            document.getElementById("stocks_display").classList.add("stocks_info_errors");
+                            document.getElementById("stocks").innerHTML = `<li class="not_found">Stock not found</li>`;
+                        }
+
+                        else {
+                            document.getElementById("stocks_display").classList.remove("stocks_info_errors");
+                            document.getElementById("stocks").innerHTML = `<div class="first_column"><li class="symbol"> ${data.symbol}</li>` +  `<li class="company_name">${data.company_name}</li></div>` + `<div class="sec_column"><p>Price</p><li class="price"><i class="fa-solid fa-dollar-sign"></i>${data.price} </li></div>`;
+                            document.querySelector(".stocks_info").addEventListener('click', function() {
+                                window.location.href=`/stock-info?symbol=${data.symbol}`;
+                            });
+                        }
+                    }
+                    catch (error) {
+                        document.getElementById("stocks_display").classList.add("stocks_info_errors");
+                        document.getElementById("stocks").innerHTML = `<li>Unable to fetch stock data</li>`;
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

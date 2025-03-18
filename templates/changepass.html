@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}Change Password{% endblock %}
+
+{% block main %}
+    <div class="container_change_pass">
+        <div class="container_form_change_pass">
+            <div class="text">
+                <h1 class="title_change_pass">Change password</h1>
+                <p class="p_change_pass">Enter a new password below to change you password</p>
+            </div>
+            <div id="container_error_messages_id" class="container_error_messages_change_pass" style="display: none;">
+                <p id="error_messages_p"></p>
+            </div>
+            <form action="/change_pass" method="post" id="form_changepass">
+                <input id="currPass" type="password" autocomplete="off" placeholder="Current password" name="curr_pass">
+                <input id="newPass" type="password" autocomplete="off" placeholder="New password" name="new_pass">
+                <input id="rNewPass" type="password" autocomplete="off" placeholder="Confirm new password" name="r_new_pass">
+                <div class="container_button_change_pass">
+                    <button type="submit">Update password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById("form_changepass").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let formData = {
+                currPass: document.getElementById("currPass").value,
+                newPass: document.getElementById("newPass").value,
+                rNewPass: document.getElementById("rNewPass").value
+            }
+
+            let response = await fetch("/change_pass", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            let result = await response.json();
+            if (response.ok) {
+                if (result.success) {
+                    window.location.href = result.redirect;
+                    alert(result.message);
+                }
+            }
+            else {
+                document.getElementById("error_messages_p").innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>${result.error}`;
+                document.getElementById("container_error_messages_id").style.display = "flex";
+                document.querySelector(".p_change_pass").style.display = "none";
+            }
+        });
+    </script>
+{% endblock %}

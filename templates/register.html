@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block log_sign %}
+    <div class="container">
+        <div class="container_form">
+            <div id="container_error_messages_id" class="container_error_messages" style="display: none;">
+                <p id="error_messages_p"></p>
+            </div>
+            <form action="/register" method="post" id="form_register">
+                <input id="username_r" placeholder="Username" type="text" autocomplete="off" name="username">
+                <input id="password_r" placeholder="Password" type="password" autocomplete="off" autofocus name="password">
+                <input id="r_password_r" placeholder="Repet Password" type="password" autocomplete="off" autofocus name="r_password">
+                <div class="container_button_register">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+            <div class="container_form_footer">
+                <p>Already have an account?<a href="/login">Log in</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("form_register").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let formData = {
+                username: document.getElementById("username_r").value,
+                password: document.getElementById("password_r").value,
+                r_password: document.getElementById("r_password_r").value
+            }
+
+            let response = await fetch("/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            let result = await response.json();
+            if (response.ok){
+                if (result.success) {
+                    window.location.href = result.redirect;
+                }
+            }
+            else {
+                document.getElementById("error_messages_p").innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>${result.error}`;
+                document.getElementById("container_error_messages_id").style.display = "flex";
+            }
+        });
+    </script>
+{% endblock %}

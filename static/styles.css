@@ -1,0 +1,1073 @@
+@import url(https://db.onlinewebfonts.com/c/61d730ffc5624e35a3588e259598a4b7?family=CNN+Sans+Display+W04+Light);
+@import url(https://db.onlinewebfonts.com/c/f2e1abbbcb94d8e9ad5e8d186dd10972?family=CNN+Sans+Display+Black);
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Geo:ital@0;1&family=Jost:ital,wght@0,100..900;1,100..900&family=Lilita+One&family=Martian+Mono:wght@100..800&family=Rubik+Mono+One&family=Sigmar&family=Sour+Gummy:ital@0;1&display=swap');
+@import url(https://db.onlinewebfonts.com/c/9c2a09458e2f83605d5cc89800785bdc?family=CNN+Sans+Display+Bold);
+
+* {
+    list-style: none;
+    font-family: "Sour Gummy", sans-serif;
+}
+
+hr.hidden {
+    display: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: inherit;
+}
+
+body {
+    background-color: #F7FCFD;
+}
+
+.container {
+    background-color: #F1F1F6;
+    margin: auto;
+    padding: 20px;
+    height: 55vh;
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #232b2b;
+    border-radius: 5px;
+}
+
+.container_form {
+    display: flex;
+    place-items: center;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+form {
+    margin: auto;
+    width: 80%;
+}
+
+
+
+input {
+    width: 100%;
+    padding: 0px 0px 0px 15px;
+    height: 45px;
+    margin-bottom: 10px;
+    align-content: center;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+}
+
+.div_password input {
+    margin-bottom: 0px;
+    min-width: 100%;
+}
+
+button {
+    width: 80%;
+    height: 45px;
+    margin-bottom: 10px;
+    align-content: center;
+    border-radius: 5px;
+    opacity: 0.7;
+    border: 1px solid #7D7D7D;
+    transition: 0.3s;
+    background-color: #FCFCFC;
+}
+
+.container_button button:hover {
+    background-color: #3e8e41;
+    opacity: 0.9;
+    color: white;
+}
+
+.container_button {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.container_button_register {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.container_button_register button:hover {
+    background-color: #3e8e41;
+    opacity: 0.9;
+    color: white;
+}
+
+.container_form_footer {
+    font-size: 15px;
+    font-weight: normal;
+    width: 100%;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    padding: 0px 0px 0px 15px;
+}
+
+p {
+    margin-bottom: 5px;
+}
+
+.div_password {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.span {
+    margin-right: 15px;
+    position: absolute;
+}
+
+.span i {
+    cursor: pointer;
+}
+
+.container_user {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.container_user i {
+    cursor: pointer;
+}
+
+.sidebar_hidden {
+    position: fixed;
+    right: -100%;
+    opacity: 0;
+    visibility: hidden;
+    height: 100%;
+    background-color: #353839;
+    width: 300px;
+    top: 0;
+    transition: right 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s;
+}
+
+.sidebar_hidden.sidebar_show {
+    right: 0;
+    opacity: 1;
+    visibility: visible;
+    z-index: 9999;
+
+}
+
+.sidebar_hidden header {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    width: 100%;
+    align-items: center;
+    background-color: #3b444b;
+}
+
+.sidebar_hidden header i {
+    font-size: 8rem;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+#close_sidebar {
+    position: absolute;
+    font-size: 2rem;
+    text-align: start;
+    left: 0;
+    margin-left: 20px;
+    margin-top: 0;
+    cursor: pointer;
+}
+
+.sidebar_hidden ul {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+.sidebar_hidden ul li a i {
+    margin-right: 16px;
+}
+
+.sidebar_hidden ul li a {
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    font-size: 20px;
+    color: white;
+    padding-left: 40px;
+    box-sizing: border-box;
+    transition: .35s ease-in;
+    transition: .35s ease-out;
+    border-bottom: 1px solid #414a4c;
+}
+
+.sidebar_hidden ul li:hover a {
+    padding-left: 45px;
+    background-color: #0e1111;
+    border-left: 15px solid #AF8FE9;
+}
+
+.logout {
+    display: flex;
+    justify-content: center;
+    height: 60%;
+    align-items: flex-end;
+}
+
+.logout a {
+    padding: 0;
+}
+
+.logout button {
+    margin: 0;
+    height: 45px;
+    width: 130px;
+    background-color: #ff4c4c;
+    color:white;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout button:hover {
+    opacity: 0.9;
+}
+
+.logout button i {
+    padding-right: 10px;
+}
+
+.nav {
+    color: white;
+    align-items: center;
+}
+
+.nav a {
+    color: white;
+}
+
+.nav a:hover {
+    color: #dcdcdc
+}
+
+.container_change_pass {
+    background-color: #F1F1F6;
+    margin: auto;
+    padding: 2px;
+    height: 70vh;
+    width: 25%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #232b2b;
+    border-radius: 5px;
+}
+
+.container_form_change_pass {
+    display: flex;
+    place-items: center;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.text {
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    flex-direction: column;
+}
+
+.text h1 {
+    margin-bottom: 25px;
+    font-family: "Dosis", sans-serif;
+}
+
+.text p {
+    margin: 15px auto auto auto;
+    width: 80%;
+}
+
+.container_button_change_pass {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.container_button_change_pass button:hover {
+    background-color: #6488EA;
+    opacity: 1;
+    color: white;
+}
+
+.container_search_stocks {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px 0 0 0;
+}
+
+.container_search_stocks input {
+    border: 2px solid #6488EA;
+    border-radius: 50px;
+    margin-bottom: 0;
+    padding-left: 40px;
+    width: 450px;
+}
+
+.container_search_stocks input:focus {
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+.search_input i {
+    position: absolute;
+    margin: 15px 0 15px 15px;
+}
+
+.stocks_info {
+    padding: 20px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    height: 100%;
+    width: 100%;
+    background-color: #20272e;
+    transition: all .2s ease;
+}
+
+.stocks_info:hover {
+    cursor: pointer;
+    background-color: #37528e;
+}
+
+.stocks_info ul {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    text-align: center;
+    color: white;
+}
+
+.stocks_info.stocks_info_errors {
+    height: 5px;
+}
+
+.stocks_info.stocks_info_errors:hover {
+    background-color: #20272e;
+    cursor: default;
+}
+
+.stocks_info.stocks_info_errors ul {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.first_column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.symbol {
+    font-size: 2rem;
+    color: #9fd7ff;
+    font-family: 'Jost', sans-serif;
+}
+
+.company_name {
+    font-family: 'Jost', sans-serif;
+}
+
+.sec_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.sec_column p {
+    font-size: 20px;
+    font-family: "CNN Sans Display W04 Light", sans-serif;
+}
+
+.price {
+    font-family: "CNN Sans Display Black", sans-serif;
+    font-size: 18px;
+    padding-left: 15px;
+}
+
+.price i {
+    margin: 0;
+    position: relative;
+    padding-right: 2px;
+}
+
+.container_stock_info_full {
+    display: flex;
+    width: 60%;
+    margin: 50px auto auto auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container_stock_info_information {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.container_stock_info_information h2 {
+    font-family: "CNN Sans Display Bold", sans-serif;
+}
+
+
+.logo_container img {
+    padding: 5px;
+}
+
+.description {
+    font-family: "CNN Sans Display W04 Light", sans-serif;
+    font-size: 15px;
+}
+
+.symbol_information{
+    font-family: "CNN Sans Display Bold", sans-serif;
+    font-size: 12px;
+    color: #404040;
+}
+
+.about_stock {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    border: .5px solid #ddd;
+    border-radius: 5px;
+    padding: 30px 0 30px 0;
+    margin: 55px auto auto auto;
+    line-height: 40px;
+}
+
+.stock_one_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p_key {
+    font-family: "CNN Sans Display W04 Light", sans-serif;
+}
+
+.p_response {
+    font-family: "CNN Sans Display Bold", sans-serif;
+}
+
+.p_response.a {
+    color: black;
+    text-decoration: underline;
+}
+
+.about_stock_info {
+    width: 450px;
+}
+
+.about_stock_info h1{
+    font-family: "CNN Sans Display Bold", sans-serif;
+    font-size: 25px;
+}
+
+.about_stock_info_basic {
+    width: 300px;
+}
+
+.about_stock_info_basic h5 {
+    font-family: "CNN Sans Display W04 Light", sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.about_stock_info_statistics {
+    width: 380px;
+}
+
+.about_stock_info_statistics h5 {
+    font-family: "CNN Sans Display W04 Light", sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.pops_ups {
+    display: flex;
+}
+
+.main_container_lectures {
+    margin: 50px auto 50px auto;
+    width: 65%;
+}
+
+
+.lectures {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    justify-content: center;
+}
+
+.lectures_even {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    justify-content: center;
+}
+
+.lecture_info {
+    width: 100%;
+}
+
+.lecture_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lecture_header h1 {
+    font-family: "CNN Sans Display Black", sans-serif;
+    margin: 0;
+}
+
+.button_psets {
+    width: 100px;
+    background-color: transparent;
+    opacity: 1;
+    border: 1.5px solid #191922;
+    color: #191922;
+    border-radius: 30px;
+    font-family: "Sigmar", sans-serif;
+    margin: 0;
+}
+
+.button_psets:hover {
+    background-color: #191922;
+    color: white;
+    border: 0;
+}
+
+.button_psets.hidden {
+    display: none;
+}
+
+.pop_up {
+    position: fixed;
+    border-radius: 15px;
+    width: 480px;
+    display: none;
+    background-color: white;
+    color: white;
+    z-index: 1;
+    padding: 15px 25px 15px 25px;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    height: 350px;
+    transform: translate(-50%, -50%) scale(0.1);
+    background-color: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.pop_up.show {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#close_pop_up {
+    color: #F47174;
+    opacity: .8;
+    font-size: 40px;
+    position: absolute;
+    right: 3%;
+    transition: all .5s ease;
+    bottom: 5%;
+}
+
+#close_pop_up:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.pop_up_header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.pop_up_header h2 {
+    font-family: "Sigmar", sans-serif;
+    font-size: 30px;
+    color: black;
+    opacity: .3;
+    margin: 0;
+}
+
+.pop_up_header a {
+    color: black;
+    font-family: "CNN Sans Display Bold", sans-serif;
+    height: fit-content;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.choose_pset {
+    font-size: .8rem;
+    padding-left: 10px;
+    opacity: .9;
+    color: #191922;
+    font-family: "Rubik Mono One", sans-serif;
+    margin: 25px 0 0 0;
+}
+
+.pop_up_psets {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+    margin-top: 10px;
+    justify-items: center;
+}
+
+.pop_up_psets.scratch {
+    grid-template-columns: auto;
+}
+
+.pop_up_psets.scratch button{
+    width: 250px;
+}
+
+.pop_up_psets button{
+    border-radius: 40px;
+    height: 35px;
+    background-color: #191922;
+    opacity: 1;
+}
+
+.pop_up_psets button.active {
+    background-color: green;
+}
+
+.pop_up_psets button li{
+    font-family: "Lilita One", sans-serif;
+    font-size: 15px;
+    color: white;
+}
+
+.pop_up_psets button li i{
+    padding-right: 8px;
+    color: #FFEE8C;
+}
+
+.form_lecture {
+    width: 100%;
+    margin: 0;
+}
+
+.form_lecture button {
+    width: 100%;
+    margin: 5px 0 0 0;
+    background-color: transparent;
+    font-family: "CNN Sans Display Black";
+    border-radius: 0;
+}
+
+.form_lecture button:hover {
+    background-color: black;
+    color: white;
+}
+
+.form_lecture.hidden {
+    display: none;
+}
+
+.submission_sent_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-top: 8px solid #6FC276;
+}
+
+.check_icon_submission {
+    margin: 10px 0 20px 0;
+}
+
+.check_icon_submission i {
+    font-size: 6rem;
+    color: #6FC276;
+}
+
+.submission_words_thanks {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.submission_words_thanks h3 {
+    font-family: "CNN Sans Display Black";
+    font-size: 15px;
+}
+
+.submission_words_thanks p {
+    font-family: "CNN Sans Display W04 Light";
+    font-size: 12px;
+}
+
+.display_answer_lecture {
+    background-color: #fff;
+    padding: 5px;
+    width: 100%;
+    box-shadow: -2px 2px #888888;
+    border-radius: 3px;
+}
+
+.profile_lecture_answer {
+    width: 100%;
+    margin: 5px 0 5px 5px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.lecture_profile_user {
+    font-size: 2rem;
+}
+
+.person_favpset_lecture {
+    display: flex;
+    align-items: center;
+}
+
+.person_time_lecture {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.vl {
+    border-left: 2px solid #212529;
+    border-right: 2px solid #212529;
+    height: 8px;
+    margin: 0 5px 0 5px;
+}
+
+.favpset_lecture_respose {
+    font-size: 12px;
+    font-family: "Jost";
+    font-weight: 500;
+    margin-bottom: 0;
+    margin-top: .5px;
+}
+
+.person_lecture_response {
+    font-family: "CNN Sans Display Bold";
+    font-size: 15px;
+    padding: 0 0 0 8px;
+    margin-bottom: 0;
+}
+
+.time_lecture_response {
+    font-family: "CNN Sans Display W04 Light";
+    font-size: 10px;
+    padding: 0 0 0 8px;
+}
+
+.delete_edit_reply {
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-right: 14px;
+    gap: 10px;
+}
+
+.delete_edit_reply a {
+    padding: 0;
+}
+
+.anchor_button_delete {
+    padding: 0;
+    margin: 0;
+}
+
+.anchor_button_delete:hover {
+    cursor: pointer;
+}
+
+.delete_lecture_response {
+    font-size: 14.5px;
+    color: red;
+    transition: all .5s ease;
+    opacity: .6;
+}
+
+.delete_lecture_response:hover {
+    opacity: 1;
+}
+
+.anchor_button_edit i {
+    color: #353839;
+    opacity: .6;
+    transition: all .5s ease;
+    font-size: 14.5px;
+}
+
+.anchor_button_edit:hover i {
+    cursor: pointer;
+    opacity: .8;
+}
+
+.lecture_response_display {
+    width: 100%;
+    height: 100%;
+    margin-left: 45px;
+}
+
+.lecture_response_display p {
+    font-size: 15px;
+    font-family: "CNN Sans Display W04 Light";
+    width: 90%;
+    word-wrap: break-word;
+}
+
+.show_buttons_comment_edit_cancel {
+    display: none;
+    width: 100%;
+    gap: 15px;
+}
+
+.button_save_comment {
+    width: 100px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 2px;
+    color: white;
+    border: 0;
+    opacity: .7;
+    font-family: "CNN Sans Display W04 Light";
+    background-color: #4ec1b9;
+}
+
+.button_save_comment:hover {
+    opacity: 1;
+}
+
+.button_cancel_comment {
+    font-family: "CNN Sans Display W04 Light";
+    width: 100px;
+    border-radius: 2px;
+    opacity: .7;
+    border: 0;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bbbbbb;
+    gap: 8px;
+}
+
+.button_cancel_comment:hover {
+    opacity: .9;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    outline: 0;
+    border: 0;
+    border-radius: 15px;
+    box-shadow: 2px 2px #888888;
+    font-family: "Martian Mono";
+    font-size: 12px;
+    text-align: left;
+}
+
+textarea::placeholder {
+    font-family: "Martian Mono";
+    font-size: 12px;
+}
+
+.response_fav_lecture {
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 5px auto auto auto;
+    width: 80%;
+}
+
+.show_favorite_pset{
+    font-size: 16px;
+    font-family: "Lilita One", sans-serif;
+    width: 250px;
+}
+
+.fav_lecture_pset_one{
+    font-family: "Geo";
+    pointer-events: none;
+    font-size: 16px;
+    padding: 1px 0 0 0;
+    overflow: hidden;
+    font-weight: 600;
+    height: 60px;
+    text-align: center;
+    margin: auto;
+    width: 80%;
+    background-color: transparent;
+    line-height: normal;
+    border-radius: 0;
+    box-shadow: 0 0 transparent;
+}
+
+.container_img_lecture {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.anchor_tag_lecture {
+    padding: 0;
+}
+
+.anchor_tag_lecture:hover img {
+    transform: scale(1.02)
+}
+
+.img_lecture {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 5px;
+    transition: transform .5s ease;
+}
+
+.comments_lecture {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column: span 2;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    justify-content: center;
+    align-items: start;
+}
+
+.comments_lecture h1{
+    grid-column: span 2;
+    margin: 0;
+    font-family: "Lilita One";
+    font-size: 20px;
+}
+
+.container_error_messages {
+    background-color: #d13639;
+    text-align: center;
+    width: 75%;
+    height: 50px;
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.container_error_messages p {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "CNN Sans Display W04 Light";
+    margin: 0;
+}
+
+.container_error_messages p i{
+    font-size: 20px;
+}
+
+.container_error_messages_change_pass {
+    background-color: #d13639;
+    text-align: center;
+    width: 75%;
+    height: 50px;
+    margin-top: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.container_error_messages_change_pass p {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "CNN Sans Display W04 Light";
+    margin: 0;
+}
+
+.container_error_messages_change_pass p i{
+    font-size: 20px;
+}
+
+
+
+
+
+/* Media screen display grid */
+@media (max-width: 768px) {
+    .lecture_info, .container_img_lecture, .display_answer_lecture{
+        grid-column: 1 / -1 !important;
+    }
+    .person_time_lecture {
+        width: 95%;
+    }
+    .delete_edit_reply {
+        width: 20%;
+        gap: 5px;
+    }
+}

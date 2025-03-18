@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+
+{% block title %}{{ stock.company_name }}{% endblock %}
+
+{% block main %}
+    <div class="container_stock_info_full">
+      <div class="logo_container">
+        <img src="{{company.logo}}" alt="{{stock.company_name}} Logo" width="150" id="company_logo">
+      </div>
+      <div class="container_stock_info_information">
+        <h2>{{stock.company_name}}</h2>
+        <p class="symbol_information">{{stock.symbol}}</p>
+        <hr>
+        <p class="description">{{company.description}}</p>
+      </div>
+    </div>
+    <div class="about_stock">
+      <div class="about_stock_info">
+      <h1>About {{stock.symbol}}</h1>
+        <div class="stock_one_info">
+          <p class="p_key">Sector</p>
+          <p class="p_response">{{ stock.sector }}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Industry</p>
+          <p class="p_response">{{ stock.industry }}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Employees</p>
+          <p class="p_response">{{company.employees}}+</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Founded</p>
+          <p class="p_response">{{ company.foundation }}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Website</p>
+          <a class="p_response a" href="https://www.{{company.website}}" target="_BLANK">www.{{company.website}}</a>
+        </div>
+      </div>
+      <div class="about_stock_info_basic">
+        <h5>Basic stock information</h5>
+        <div class="stock_one_info">
+          <p class="p_key">Previous Close</p>
+          <p class="p_response">{{stock.previous_close}}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Open</p>
+          <p class="p_response">{{stock.open_price}}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Day High</p>
+          <p class="p_response">{{stock.day_high}}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Day Low</p>
+          <p class="p_response">{{stock.day_low}}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Currency</p>
+          <p class="p_response">{{stock.currency}}</p>
+        </div>
+      </div>
+      <div class="about_stock_info_statistics">
+        <h5>Key stock statistics</h5>
+        <div class="stock_one_info">
+          <p class="p_key">Market Cap</p>
+          <p class="p_response">{{stock.market_cap}}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">P/E Ratio</p>
+          <p class="p_response">{{stock.pe_ratio}}x</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Next Earnings Date</p>
+          <p class="p_response">{{stock.next_earnings_date}}</p>
+        </div>
+        <div class="stock_one_info">
+          <p class="p_key">Dividend Yield</p>
+          <p class="p_response">{{stock.dividend_yield}}%</p>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block log_sign %}
+    <div class="container">
+        <div class="container_form">
+            <div id="container_error_messages_id" class="container_error_messages" style="display: none;">
+                <p id="error_messages_p"></p>
+            </div>
+            <form action="/login" method="post" id="form_login">
+                <input id="username" type="text" autocomplete="off" placeholder="Username" name="username">
+                <div class="div_password">
+                    <input id="password" type="password" autocomplete="off" placeholder="Password" name="password">
+                    <div class="span"><i class="fa-solid fa-eye-slash" id="toogle"></i></div>
+                </div>
+                <div class="container_button">
+                    <button type="submit">Log in</button>
+                </div>
+            </form>
+            <div class="container_form_footer">
+                <p>Don't have an account?<a href="/register">Register</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let eyecon = document.getElementById("toogle");
+        let password = document.querySelector("#password");
+        eyecon.addEventListener("click", function() {
+            if (password.type == "password") {
+                password.type = "text";
+                eyecon.classList.remove("fa-eye-slash");
+                eyecon.classList.add("fa-eye");
+            }
+            else {
+                password.type = "password";
+                eyecon.classList.remove("fa-eye");
+                eyecon.classList.add("fa-eye-slash");
+            }
+        });
+        document.getElementById("form_login").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            let formData = {
+                password: document.getElementById("password").value,
+                username: document.getElementById("username").value
+            }
+
+            let response = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            let result = await response.json();
+
+            if (response.ok) {
+                if (result.success) {
+                    window.location.href = result.redirect;
+                }
+            }
+            else {
+                document.getElementById("error_messages_p").innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>${result.error}`;
+                document.getElementById("container_error_messages_id").style.display = "flex";
+            }
+        });
+    </script>
+{% endblock %}
