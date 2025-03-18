@@ -30,6 +30,7 @@ This is my final project for CS50, where I created a web application that allows
 │── templates/      # HTML templates for rendering pages
 │── static/         # CSS (styles.css)
 │── project.db        # SQLite database for storing form data
+│── README.md # Explains what my project is, how to use it, and how to set it up.
 │── requirements.txt # Dependencies for the project
 ```
 
